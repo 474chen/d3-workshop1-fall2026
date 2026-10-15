@@ -9,13 +9,13 @@ Click the **Fork** button in the top-right corner of this GitHub page. This crea
 Once you've forked it, clone **your fork** (not the original) to your local machine. Copy the URL from your forked repo and run:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/d3-lab1.git
+git clone https://github.com/YOUR-USERNAME/d3-workshop1-fall2026.git
 ```
 
 Then navigate into the folder:
 
 ```bash
-cd d3-lab1
+cd d3-workshop1-fall2026
 ```
 
 ### 3. Open in VS Code
@@ -35,10 +35,10 @@ Right-click on `index.html` in the VS Code file explorer and select **Open with 
 
 ### 6. Working Documents:
 For the class demo:
-We will be coding in parallel in `js/demo.js` to learn the concepts of D3. 
+We will be coding in parallel in `js/section*` files to learn the concepts of D3. 
 
 For the lab assignment:
-After the demo you will be asked to complete TODO steps in `js/stocks.js` to apply the concepts. We will grade your code from this file. 
+After the demo you will be asked to complete TODO steps in `js/assignment.js` to apply the concepts. We will grade your code from this file. 
 
 ---
 
