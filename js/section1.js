@@ -15,9 +15,9 @@
 // d3.selectAll() finds ALL elements (like querySelectorAll)
 
 d3.select('#demo-1')
-    .style('color', 'blue')
-    .style('font-size', '20px')
-    .text('This text was changed by D3!');
+    .style('color', 'red')
+    .style('font-size', '50px')
+    .text('Stir-fried Cauliflower with Pork');
 
 // TODO: change the text above to add your name
 // TODO: change the color to something else you like // keep in mind color contrast
@@ -27,6 +27,6 @@ d3.select('#demo-1')
 d3.select('#demo-1')
     .append('p')
     .text('This paragraph was created by D3')
-    .style('background-color', 'lightgray');
+    .style('background-color', '#9cff33');
 
 // TODO: append a new element with your favorite food and style it with a different background color

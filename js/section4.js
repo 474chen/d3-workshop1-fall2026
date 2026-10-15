@@ -107,18 +107,64 @@ const hBarWidth = 400 - hBarMargin.left - hBarMargin.right;
 const hBarHeight = 500 - hBarMargin.top - hBarMargin.bottom;
 
 // Create SVG for horizontal bar chart
-
+const hBarSvg = d3.select('#demo-4')
+    .append('svg')
+    .attr('viewBox', `0 0 ${hBarWidth + hBarMargin.left + hBarMargin.right} ${hBarHeight + hBarMargin.top + hBarMargin.bottom}`)
+    .attr('preserveAspectRatio', 'xMidYMid meet')
+    .append('g')
+    .attr('transform', `translate(${hBarMargin.left},${hBarMargin.top})`);
 
 // Create scales for the horizontal bar chart
+// X 轴 — 线性比例尺（天然气价格）
+const xHBarScale = d3.scaleLinear()
+    .domain([0, d3.max(top15Gas, d => d.gas)])
+    .range([0, hBarWidth]);
 
+// Y 轴 — 序数比例尺（州名），注意 horizontal bar 上下要反过来
+const yHBarScale = d3.scaleBand()
+    .domain(top15Gas.map(d => d.state))
+    .range([0, hBarHeight])
+    .padding(0.25);
 
 // Create axes and append them to the svg
+// X 轴（底部）
+const xHAxis = d3.axisBottom(xHBarScale)
+    .ticks(5)
+    .tickFormat(d => `$${d.toFixed(2)}`);
 
+hBarSvg.append('g')
+    .attr('transform', `translate(0, ${hBarHeight})`)
+    .call(xHAxis);
+
+// Y 轴（左侧，州名）
+const yHAxis = d3.axisLeft(yHBarScale);
+
+hBarSvg.append('g')
+    .call(yHAxis);
 
 // Create and append bars to the chart
-
+hBarSvg.selectAll('rect')
+    .data(top15Gas)
+    .join('rect')
+    .attr('x', 0)
+    .attr('y', d => yHBarScale(d.state))
+    .attr('width', d => xHBarScale(d.gas))
+    .attr('height', yHBarScale.bandwidth())
+    .attr('fill', 'orange');
 
 // Chart title
-
+hBarSvg.append('text')
+    .attr('x', hBarWidth / 2)
+    .attr('y', -10)
+    .attr('text-anchor', 'middle')
+    .style('font-size', '16px')
+    .style('font-weight', 'bold')
+    .text('Top 15 States by Gas Price');
 
 // X axis label
+hBarSvg.append('text')
+    .attr('x', hBarWidth / 2)
+    .attr('y', hBarHeight + 40)
+    .attr('text-anchor', 'middle')
+    .style('font-size', '12px')
+    .text('Gas Price (per gallon)');
