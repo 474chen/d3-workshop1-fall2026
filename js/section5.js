@@ -71,14 +71,14 @@ const line = d3.line()
     .y(d => yLineScale(d.Price)) // Map the Price to the y-axis using the yLineScale
     .curve(d3.curveMonotoneX);  // Use a smooth curve for the lines
 
-lineData.forEach(region => {
-    lineSvg.append('path')
-        .datum(region.values) // Bind the values for this region to the path element
-        .attr('fill', 'none') // We don't want to fill under the line, so set fill to 'none'
-        .attr('stroke', color(region.name)) // Set the stroke color based on the region name using the color scale
-        .attr('stroke-width', 2) // Set the stroke width to 2 pixels
-        .attr('d', line); // Use the line generator to create the 'd' attribute for the path, which defines the shape of the line based on the data
-});
+lineSvg.selectAll('.line') // Select any existing elements with class "line" (none on first run)
+    .data(lineData) // Bind one data object per region
+    .join('path') // Create a path for each region, update or remove on re-render
+    .attr('class', 'line') // Tag each path so selectAll('.line') finds it next time
+    .attr('fill', 'none') // Don't fill the area under the line
+    .attr('stroke', d => color(d.name))  // Color the line by region name
+    .attr('stroke-width', 2) // Line thickness in pixels
+    .attr('d', d => line(d.values)); // Generate the path shape from this region's values
 
 // Add legend
 const legend = lineSvg.append('g')
