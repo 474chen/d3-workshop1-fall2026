@@ -35,7 +35,7 @@ Right-click on `index.html` in the VS Code file explorer and select **Open with 
 
 ### 6. Working Documents:
 For the class demo:
-We will be coding in parallel in `js/section*` files to learn the concepts of D3. 
+We will be coding in parallel in `js/section*.js` files to learn the concepts of D3. 
 
 For the lab assignment:
 After the demo you will be asked to complete TODO steps in `js/assignment.js` to apply the concepts. We will grade your code from this file. 
